@@ -1,0 +1,39 @@
+{
+  "name": "publish-library",
+  "version": "1.0.0",
+  "description": "Build the library, create git tag, update changelog and publish to npm",
+  "main": "publish.js",
+  "scripts": {
+    "commit": "cz",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sanul-Raskar/publish-library.git"
+  },
+  "keywords": [
+    "npm",
+    "publish",
+    "git",
+    "tag",
+    "changelog"
+  ],
+  "author": "Sanul Raskar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sanul-Raskar/publish-library/issues"
+  },
+  "homepage": "https://github.com/Sanul-Raskar/publish-library#readme",
+  "dependencies": {
+    "inquirer": "^8.2.2"
+  },
+  "devDependencies": {
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
