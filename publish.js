@@ -22,32 +22,35 @@ inquirer
   .then(({ changeType }) => {
     // Use user feedback for... whatever!!
 
-    exec(`npm version ${changeType}`, (error, stdout, stderr) => {
-      if (error !== null) {
-        //run npm run build command here
+    exec(
+      `npm version --no-git-tag-version ${changeType}`,
+      (error, stdout, stderr) => {
+        if (error !== null) {
+          //run npm run build command here
 
-        exec("npm pkg get version", (error, stdout, stderr) => {
-          if (error !== null) {
-            exec(
-              `git commit -m 'chore: Build for v${stdout}'`,
-              (error, stdout, stderr) => {
-                if (error !== null) {
-                  const tagName = `designsystem@v${stdout}`;
+          exec("npm pkg get version", (error, stdout, stderr) => {
+            if (error !== null) {
+              exec(
+                `git commit -m 'chore: Build for v${stdout}'`,
+                (error, stdout, stderr) => {
+                  if (error !== null) {
+                    const tagName = `designsystem@v${stdout}`;
 
-                  exec(
-                    `git tag ${tagName} && git push origin ${tagName}`,
-                    (error, stdout, stderr) => {
-                      if (error !== null) {
+                    exec(
+                      `git tag ${tagName} && git push origin ${tagName}`,
+                      (error, stdout, stderr) => {
+                        if (error !== null) {
+                        }
                       }
-                    }
-                  );
+                    );
+                  }
                 }
-              }
-            );
-          }
-        });
+              );
+            }
+          });
+        }
       }
-    });
+    );
   })
   .catch((error) => {
     if (error.isTtyError) {
