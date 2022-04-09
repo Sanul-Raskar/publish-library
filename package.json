@@ -1,6 +1,6 @@
 {
   "name": "publish-library",
-  "version": "1.1.11",
+  "version": "1.1.20",
   "description": "Build the library, create git tag, update changelog and publish to npm",
   "main": "publish.js",
   "scripts": {

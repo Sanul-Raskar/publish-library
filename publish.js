@@ -20,14 +20,16 @@ inquirer
   ])
   .then(({ changeType }) => {
     exec(
-      `npm version --no-git-tag-version ${changeType} && npm pkg get version`,
+      `npm version --no-git-tag-version ${changeType}`,
       (error, stdout, stderr) => {
         if (error === null) {
+          const pkgVersion = stdout.replace(/["\n]/g, "");
+          const tagName = `designsystem@${pkgVersion}`;
+
           exec("npm run build", (error, stdout, stderr) => {
             if (error === null) {
-              const tagName = `designsystem@v${stdout.replaceAll('"', "")}`;
               exec(
-                `git add lib/* && git commit -m 'chore: Build for v${stdout}'`,
+                `git add lib/* && git commit -m 'chore: Build for ${pkgVersion}'`,
                 (error, stdout, stderr) => {
                   if (error === null) {
                     exec(
